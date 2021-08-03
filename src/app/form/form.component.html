@@ -1,0 +1,59 @@
+
+<form novalidate #empform="ngForm" (ngSubmit)=onSubmit(empform) >
+    <mat-form-field  appearance="fill">
+        <mat-label>Name :</mat-label>
+        <input matInput ngModel name="name" required #name="ngModel">
+        <mat-error *ngIf="name.errors?.required">Name is required</mat-error>
+    </mat-form-field>
+
+    <mat-label>Gender:</mat-label>
+    <mat-radio-group name="gender" ngModel required  >
+       <mat-radio-button value="Male">Male</mat-radio-button>
+        <mat-radio-button value="Female" >Female</mat-radio-button>
+    </mat-radio-group>
+    
+    <mat-form-field appearance="fill">
+        <mat-label>Date of Joining</mat-label>
+        <input matInput [matDatepicker]="dojpicker" placeholder="MM/DD/YYYY" ngModel name="doj" [max]="maxdate" required>
+        <mat-datepicker-toggle matSuffix [for]="dojpicker"></mat-datepicker-toggle>
+        <mat-datepicker #dojpicker></mat-datepicker>
+        <mat-error *ngIf="name.errors?.required">Date is required</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Address:</mat-label>
+        <textarea ngModel name="address" matInput required></textarea>
+        <mat-error *ngIf="name.errors?.required">Address is required</mat-error>
+      </mat-form-field>
+      <button type="submit" mat-raised-button color="primary"  [disabled]="empform.form.invalid" >submit</button>
+
+
+</form>
+
+
+<hr>
+<table mat-table [dataSource]='formdata'>
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name</th>
+        <td mat-cell *matCellDef="let user">{{user.name}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef> Gender</th>
+        <td mat-cell *matCellDef="let user">{{user.gender}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="doj">
+        <th mat-header-cell *matHeaderCellDef>Date of Joining</th>
+        <td mat-cell *matCellDef="let user">{{user.doj|date}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef>address</th>
+        <td mat-cell *matCellDef="let user">{{user.address}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

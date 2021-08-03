@@ -1,0 +1,22 @@
+table{
+    border-collapse: collapse;
+    width: 100%;
+    
+  }
+  
+  
+  th,td,tr {
+   text-align: center ;
+    color: black;
+    border: 3px solid black;
+  }
+  
+  tr:hover {
+      
+    background-color:#d87676;
+     color:white;
+     border:  3px solid black;
+}
+
+
+
